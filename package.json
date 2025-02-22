@@ -1,0 +1,44 @@
+{
+  "name": "flyio-api",
+  "version": "1.0.0",
+  "main": "api/index.ts",
+  "author": "Octavio Cossy Torquati (ovct)",
+  "description": "Fly.IO deploy testing.",
+  "type": "commonjs",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev api/index.ts",
+    "fly:deploy": "fly deploy",
+    "fly:stop": "fly scale count 0",
+    "fly:start": "fly scale count 1",
+    "docker:build": "docker build -t flyio-api .",
+    "docker:run": "docker run -d -p 8080:8080 flyio-api",
+    "docker:stop": "docker stop $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}}) && docker rm $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}})",
+    "docker:update": "docker stop $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}}) && docker build -t flyio-api . && docker run -d -p 8080:8080 flyio-api"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.7",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.11.0",
+    "eslint-plugin-n": "^17.15.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-promise": "^7.2.1",
+    "prettier": "^3.4.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
