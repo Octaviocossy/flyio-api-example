@@ -13,9 +13,9 @@
     "fly:stop": "fly scale count 0",
     "fly:start": "fly scale count 1",
     "docker:build": "docker build -t flyio-api .",
-    "docker:run": "docker run -d -p 8080:8080 flyio-api",
+    "docker:run": "docker run -d -p 3001:3001 flyio-api",
     "docker:stop": "docker stop $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}}) && docker rm $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}})",
-    "docker:update": "docker stop $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}}) && docker build -t flyio-api . && docker run -d -p 8080:8080 flyio-api"
+    "docker:update": "docker stop $(docker ps -a -q --filter ancestor=flyio-api --format={{.ID}}) && docker build -t flyio-api . && docker run -d -p 3001:3001 flyio-api"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
